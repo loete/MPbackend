@@ -1,15 +1,16 @@
 package at.fhj.swengs.controller;
 
 import at.fhj.swengs.model.Message;
+import at.fhj.swengs.model.MessageRepository;
 import at.fhj.swengs.model.User;
 import at.fhj.swengs.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 /**
  * Created by loete on 31.01.2017.
@@ -18,6 +19,8 @@ import java.util.List;
 @RequestMapping("/rest")
 public class MessageResource {
 
+    @Autowired
+    private MessageRepository repo;
 
     @Autowired
     private MessageService messageService;
@@ -42,6 +45,11 @@ public class MessageResource {
         Message currentMessage = messageService.findByMessageID(message.getMessageID());
         currentMessage.setLikes(message.getLikes());
         messageService.save(currentMessage);
+    }
+
+    @RequestMapping(value= "/message/delete", method= RequestMethod.DELETE)
+    public void deleteMessage(@RequestBody Message message) {
+       repo.delete(message.getMessageID());
     }
 
 }

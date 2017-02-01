@@ -88,6 +88,7 @@ public class Message {
         this.likes = likes;
     }
 
+
     /** public List<Comment> getCommentList() {
         return commentList;
     }
