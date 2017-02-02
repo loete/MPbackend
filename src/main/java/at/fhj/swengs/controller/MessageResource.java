@@ -54,12 +54,13 @@ public class MessageResource {
         currentMessage.setMessageContent(message.getMessageContent());
         currentMessage.setMessageDate(message.getMessageDate());
         currentMessage.setMessageTitle(message.getMessageTitle());
+        currentMessage.setUser(message.getUser());
         messageService.save(currentMessage);
     }
 
-    @RequestMapping(value= "/message/delete/{messageID}", method= RequestMethod.DELETE)
-    public void deleteMessage(@PathVariable("messageID") Long id) {
-        messageRepository.delete(id);
+    @RequestMapping(value= "/message/delete", method= RequestMethod.POST)
+    public void deleteMessage(@RequestBody Message message) {
+        messageRepository.delete(message);
     }
 
 }

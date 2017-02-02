@@ -12,6 +12,8 @@ import java.util.List;
 public interface MessageRepository extends CrudRepository<Message, Long> {
     Message save(Message message);
 
+    void delete(Long id);
+
     List<Message> findByUser(User user);
 
     List<Message> findAll();
