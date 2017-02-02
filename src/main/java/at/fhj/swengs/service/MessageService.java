@@ -16,4 +16,5 @@ public interface MessageService {
     List<Message> findByUser(User user);
 
     Message findByMessageID(Long messageId);
+
 }

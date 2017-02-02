@@ -1,7 +1,9 @@
 package at.fhj.swengs.model;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,4 +19,7 @@ public interface MessageRepository extends CrudRepository<Message, Long> {
     List<Message> findAll();
 
     Message findByMessageID(Long messageId);
+
+    @Transactional
+    Long deleteByMessageID(Long messageId);
 }
