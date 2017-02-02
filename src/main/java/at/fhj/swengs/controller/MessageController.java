@@ -1,7 +1,7 @@
 package at.fhj.swengs.controller;
 
 import at.fhj.swengs.model.Message;
-import at.fhj.swengs.service.MessageService;
+import at.fhj.swengs.model.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +16,10 @@ import java.util.List;
 public class MessageController {
 
     @Autowired
-    private MessageService messageService;
+    private MessageRepository messageRepository;
 
     @RequestMapping("/allMessages")
     public List<Message> getAllMessages() {
-        return messageService.findAll();
+        return messageRepository.findAll();
     }
 }

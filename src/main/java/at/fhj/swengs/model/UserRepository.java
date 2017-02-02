@@ -10,11 +10,10 @@ import java.util.List;
  */
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
+
     List<User> findAll();
 
     User findByUserName(String userName);
-
-    User findByUserID(Long userID);
 
     User save(User user);
 }

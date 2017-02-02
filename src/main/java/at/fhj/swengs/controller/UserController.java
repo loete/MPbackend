@@ -1,7 +1,7 @@
 package at.fhj.swengs.controller;
 
-import at.fhj.swengs.service.UserService;
 import at.fhj.swengs.model.User;
+import at.fhj.swengs.model.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @RequestMapping(value="login", method= RequestMethod.POST)
     public String login(@RequestBody Map<String,String> json) throws ServletException{
@@ -34,7 +34,7 @@ public class UserController {
         String userName = json.get("username");
         String password = json.get("password");
 
-        User user = userService.findByUserName(userName);
+        User user = userRepository.findByUserName(userName);
 
         if(user == null){
             throw new ServletException("User name not found!");
@@ -52,6 +52,6 @@ public class UserController {
 
     @RequestMapping(value="/register")
     public User registerUser(@RequestBody User user) {
-        return userService.save(user);
+        return userRepository.save(user);
     }
 }

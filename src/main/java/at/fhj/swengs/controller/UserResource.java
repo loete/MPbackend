@@ -1,7 +1,6 @@
 package at.fhj.swengs.controller;
 
 import at.fhj.swengs.model.UserRepository;
-import at.fhj.swengs.service.UserService;
 import at.fhj.swengs.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,17 +20,14 @@ public class UserResource {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping("user/users")
     public List<User> findAllUsers() {
-        return userService.findAllUsers();
+        return userRepository.findAll();
     }
 
     @RequestMapping(value="/user/userName", method = RequestMethod.POST)
     public User findByUserName(@RequestBody String userName) {
-        return userService.findByUserName(userName);
+        return userRepository.findByUserName(userName);
     }
 
     @RequestMapping(value = "/user/update", method=RequestMethod.POST)
@@ -39,7 +35,7 @@ public class UserResource {
         User currentUser = userRepository.findOne(user.getUserID());
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());
-        userService.save(user);
+        userRepository.save(user);
     }
 
     @RequestMapping(value = "/user/delete", method=RequestMethod.POST)

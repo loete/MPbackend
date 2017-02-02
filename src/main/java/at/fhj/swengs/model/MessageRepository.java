@@ -12,13 +12,13 @@ import java.util.List;
  */
 @Repository
 public interface MessageRepository extends CrudRepository<Message, Long> {
-    Message save(Message message);
 
-    void delete(Long id);
+    Message save(Message message);
 
     List<Message> findByUser(User user);
 
     List<Message> findAll();
 
     Message findByMessageID(Long messageId);
+
 }
