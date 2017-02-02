@@ -5,6 +5,8 @@ import at.fhj.swengs.model.MessageRepository;
 import at.fhj.swengs.model.User;
 import at.fhj.swengs.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +59,7 @@ public class MessageResource {
         currentMessage.setUser(message.getUser());
         messageService.save(currentMessage);
     }
+
 
     @RequestMapping(value= "/message/delete", method= RequestMethod.POST)
     public void deleteMessage(@RequestBody Message message) {
