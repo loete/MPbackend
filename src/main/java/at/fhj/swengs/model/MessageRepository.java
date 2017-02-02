@@ -19,7 +19,4 @@ public interface MessageRepository extends CrudRepository<Message, Long> {
     List<Message> findAll();
 
     Message findByMessageID(Long messageId);
-
-    @Transactional
-    Long deleteByMessageID(Long messageId);
 }
