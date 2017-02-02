@@ -57,7 +57,7 @@ public class MessageResource {
         messageService.save(currentMessage);
     }
 
-    @RequestMapping(value= "/message/delete/{messageID}", method= RequestMethod.DELETE)
+    @RequestMapping(value= "/message/delete/{messageID}", method= RequestMethod.POST)
     public void deleteMessage(@PathVariable("messageID") Long id) {
         messageRepository.delete(id);
     }
