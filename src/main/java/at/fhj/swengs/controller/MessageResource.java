@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
@@ -20,7 +21,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 public class MessageResource {
 
     @Autowired
-    private MessageRepository repo;
+    private MessageRepository messageRepository;
 
     @Autowired
     private MessageService messageService;
@@ -47,9 +48,18 @@ public class MessageResource {
         messageService.save(currentMessage);
     }
 
-    @RequestMapping(value= "/message/delete", method= RequestMethod.DELETE)
-    public void deleteMessage(@RequestBody Message message) {
-       repo.delete(message.getMessageID());
+    @RequestMapping(value = "/message/edit", method= RequestMethod.POST)
+    public void editMessage(@RequestBody Message message){
+        Message currentMessage = messageService.findByMessageID(message.getMessageID());
+        currentMessage.setMessageContent(message.getMessageContent());
+        currentMessage.setMessageDate(message.getMessageDate());
+        currentMessage.setMessageTitle(message.getMessageTitle());
+        messageService.save(currentMessage);
+    }
+
+    @RequestMapping(value= "/message/delete/{messageID}", method= RequestMethod.DELETE)
+    public void deleteMessage(@PathVariable("messageID") Long id) {
+        messageRepository.delete(id);
     }
 
 }
