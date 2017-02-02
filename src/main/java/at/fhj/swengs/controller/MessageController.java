@@ -19,7 +19,7 @@ public class MessageController {
     private MessageService messageService;
 
     @RequestMapping("/allMessages")
-    public List<Message> getAllPhotos() {
+    public List<Message> getAllMessages() {
         return messageService.findAll();
     }
 }
